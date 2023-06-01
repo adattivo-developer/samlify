@@ -25,7 +25,7 @@ export default class Metadata implements MetadataInterface {
   meta: any;
 
   /**
-  * @param  {string | Buffer} metadata xml
+  * @param  {string | Buffer} xml
   * @param  {object} extraParse for custom metadata extractor
   */
   constructor(xml: string | Buffer, extraParse: any = []) {
@@ -116,7 +116,7 @@ export default class Metadata implements MetadataInterface {
   * @param  {string} use declares the type of certificate
   * @return {string} certificate in string format
   */
-  public getX509Certificate(use: string): string | string[] {
+  public getX509Certificate(use: string) {
     return this.meta.certificate[use] || null;
   }
 
@@ -140,7 +140,7 @@ export default class Metadata implements MetadataInterface {
       if (!(singleLogoutService instanceof Array)) {
         singleLogoutService = [singleLogoutService];
        }
-      const service = singleLogoutService.find(obj => obj.binding === bindType);      
+      const service = singleLogoutService.find(obj => obj.binding === bindType);
       if (service) {
         return service.location;
       }
