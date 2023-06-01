@@ -206,7 +206,7 @@ function postFlow(options) {
                 case 2:
                     // check status based on different scenarios
                     _d.sent();
-                    // verify the signatures (the repsonse is encrypted then signed, then verify first then decrypt)
+                    // verify the signatures (the response is encrypted then signed, then verify first then decrypt)
                     if (checkSignature &&
                         from.entitySetting.messageSigningOrder === urn_1.MessageSignatureOrder.ETS) {
                         _b = __read(libsaml_1.default.verifySignature(samlContent, verificationOptions), 2), verified = _b[0], verifiedAssertionNode = _b[1];
@@ -225,7 +225,7 @@ function postFlow(options) {
                     extractorFields = getDefaultExtractorFields(parserType, result[1]);
                     _d.label = 4;
                 case 4:
-                    // verify the signatures (the repsonse is signed then encrypted, then decrypt first then verify)
+                    // verify the signatures (the response is signed then encrypted, then decrypt first then verify)
                     if (checkSignature &&
                         from.entitySetting.messageSigningOrder === urn_1.MessageSignatureOrder.STE) {
                         _c = __read(libsaml_1.default.verifySignature(samlContent, verificationOptions), 2), verified = _c[0], verifiedAssertionNode = _c[1];

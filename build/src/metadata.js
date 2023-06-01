@@ -18,7 +18,7 @@ var extractor_1 = require("./extractor");
 var utility_1 = require("./utility");
 var Metadata = /** @class */ (function () {
     /**
-    * @param  {string | Buffer} metadata xml
+    * @param  {string | Buffer} xml
     * @param  {object} extraParse for custom metadata extractor
     */
     function Metadata(xml, extraParse) {

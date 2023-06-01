@@ -284,7 +284,7 @@ function logoutResponseRedirectURL(requestInfo, entity, relayState, customTagRep
                 IssueInstant: new Date().toISOString(),
                 StatusCode: urn_1.namespace.statusCode.success,
             };
-            if (requestInfo && requestInfo.extract && requestInfo.extract.logoutRequest) {
+            if (requestInfo && requestInfo.extract && requestInfo.extract.request) {
                 tvalue.InResponseTo = requestInfo.extract.request.id;
             }
             rawSamlResponse = libsaml_1.default.replaceTagsByValue(libsaml_1.default.defaultLogoutResponseTemplate.context, tvalue);

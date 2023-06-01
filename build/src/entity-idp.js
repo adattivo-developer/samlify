@@ -77,14 +77,14 @@ var binding_simplesign_1 = __importDefault(require("./binding-simplesign"));
 var flow_1 = require("./flow");
 var utility_1 = require("./utility");
 /**
- * Identity prvider can be configured using either metadata importing or idpSetting
+ * Identity provider can be configured using either metadata importing or idpSetting
  */
 function default_1(props) {
     return new IdentityProvider(props);
 }
 exports.default = default_1;
 /**
- * Identity prvider can be configured using either metadata importing or idpSetting
+ * Identity provider can be configured using either metadata importing or idpSetting
  */
 var IdentityProvider = /** @class */ (function (_super) {
     __extends(IdentityProvider, _super);

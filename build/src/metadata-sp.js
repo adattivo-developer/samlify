@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -39,15 +50,16 @@ exports.default = default_1;
 var SpMetadata = /** @class */ (function (_super) {
     __extends(SpMetadata, _super);
     /**
-    * @param  {object/string} meta (either xml string or configuation in object)
+    * @param  {object/string} meta (either xml string or configuration in object)
     * @return {object} prototypes including public functions
     */
     function SpMetadata(meta) {
+        var e_1, _a, e_2, _b;
         var _this = this;
         var isFile = utility_1.isString(meta) || meta instanceof Buffer;
-        // use object configuation instead of importing metadata file directly
+        // use object configuration instead of importing metadata file directly
         if (!isFile) {
-            var _a = meta, _b = _a.elementsOrder, elementsOrder = _b === void 0 ? urn_1.elementsOrder.default : _b, entityID = _a.entityID, signingCert = _a.signingCert, encryptCert = _a.encryptCert, _c = _a.authnRequestsSigned, authnRequestsSigned = _c === void 0 ? false : _c, _d = _a.wantAssertionsSigned, wantAssertionsSigned = _d === void 0 ? false : _d, _e = _a.wantMessageSigned, wantMessageSigned = _e === void 0 ? false : _e, signatureConfig = _a.signatureConfig, _f = _a.nameIDFormat, nameIDFormat = _f === void 0 ? [] : _f, _g = _a.singleLogoutService, singleLogoutService = _g === void 0 ? [] : _g, _h = _a.assertionConsumerService, assertionConsumerService = _h === void 0 ? [] : _h;
+            var _c = meta, _d = _c.elementsOrder, elementsOrder = _d === void 0 ? urn_1.elementsOrder.default : _d, entityID = _c.entityID, signingCert = _c.signingCert, encryptCert = _c.encryptCert, _e = _c.authnRequestsSigned, authnRequestsSigned = _e === void 0 ? false : _e, _f = _c.wantAssertionsSigned, wantAssertionsSigned = _f === void 0 ? false : _f, _g = _c.wantMessageSigned, wantMessageSigned = _g === void 0 ? false : _g, signatureConfig = _c.signatureConfig, _h = _c.nameIDFormat, nameIDFormat = _h === void 0 ? [] : _h, _j = _c.singleLogoutService, singleLogoutService = _j === void 0 ? [] : _j, _k = _c.assertionConsumerService, assertionConsumerService = _k === void 0 ? [] : _k;
             var descriptors_1 = {
                 KeyDescriptor: [],
                 NameIDFormat: [],
@@ -65,17 +77,31 @@ var SpMetadata = /** @class */ (function (_super) {
             if (wantMessageSigned && signatureConfig === undefined) {
                 console.warn('Construct service provider - missing signatureConfig');
             }
-            if (signingCert) {
-                descriptors_1.KeyDescriptor.push(libsaml_1.default.createKeySection('signing', signingCert).KeyDescriptor);
+            try {
+                for (var _l = __values(utility_1.castArrayOpt(signingCert)), _m = _l.next(); !_m.done; _m = _l.next()) {
+                    var cert = _m.value;
+                    descriptors_1.KeyDescriptor.push(libsaml_1.default.createKeySection('signing', cert).KeyDescriptor);
+                }
             }
-            else {
-                //console.warn('Construct service provider - missing signing certificate');
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_m && !_m.done && (_a = _l.return)) _a.call(_l);
+                }
+                finally { if (e_1) throw e_1.error; }
             }
-            if (encryptCert) {
-                descriptors_1.KeyDescriptor.push(libsaml_1.default.createKeySection('encryption', encryptCert).KeyDescriptor);
+            try {
+                for (var _o = __values(utility_1.castArrayOpt(encryptCert)), _p = _o.next(); !_p.done; _p = _o.next()) {
+                    var cert = _p.value;
+                    descriptors_1.KeyDescriptor.push(libsaml_1.default.createKeySection('encryption', cert).KeyDescriptor);
+                }
             }
-            else {
-                //console.warn('Construct service provider - missing encrypt certificate');
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (_p && !_p.done && (_b = _o.return)) _b.call(_o);
+                }
+                finally { if (e_2) throw e_2.error; }
             }
             if (utility_1.isNonEmptyArray(nameIDFormat)) {
                 nameIDFormat.forEach(function (f) { return descriptors_1.NameIDFormat.push(f); });

@@ -12,6 +12,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -36,27 +47,42 @@ exports.default = default_1;
 var IdpMetadata = /** @class */ (function (_super) {
     __extends(IdpMetadata, _super);
     function IdpMetadata(meta) {
+        var e_1, _a, e_2, _b;
         var _this = this;
         var isFile = utility_1.isString(meta) || meta instanceof Buffer;
         if (!isFile) {
-            var _a = meta, entityID = _a.entityID, signingCert = _a.signingCert, encryptCert = _a.encryptCert, _b = _a.wantAuthnRequestsSigned, wantAuthnRequestsSigned = _b === void 0 ? false : _b, _c = _a.nameIDFormat, nameIDFormat = _c === void 0 ? [] : _c, _d = _a.singleSignOnService, singleSignOnService = _d === void 0 ? [] : _d, _e = _a.singleLogoutService, singleLogoutService = _e === void 0 ? [] : _e;
+            var _c = meta, entityID = _c.entityID, signingCert = _c.signingCert, encryptCert = _c.encryptCert, _d = _c.wantAuthnRequestsSigned, wantAuthnRequestsSigned = _d === void 0 ? false : _d, _e = _c.nameIDFormat, nameIDFormat = _e === void 0 ? [] : _e, _f = _c.singleSignOnService, singleSignOnService = _f === void 0 ? [] : _f, _g = _c.singleLogoutService, singleLogoutService = _g === void 0 ? [] : _g;
             var IDPSSODescriptor_1 = [{
                     _attr: {
                         WantAuthnRequestsSigned: String(wantAuthnRequestsSigned),
                         protocolSupportEnumeration: urn_1.namespace.names.protocol,
                     },
                 }];
-            if (signingCert) {
-                IDPSSODescriptor_1.push(libsaml_1.default.createKeySection('signing', signingCert));
+            try {
+                for (var _h = __values(utility_1.castArrayOpt(signingCert)), _j = _h.next(); !_j.done; _j = _h.next()) {
+                    var cert = _j.value;
+                    IDPSSODescriptor_1.push(libsaml_1.default.createKeySection('signing', cert));
+                }
             }
-            else {
-                //console.warn('Construct identity provider - missing signing certificate');
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_j && !_j.done && (_a = _h.return)) _a.call(_h);
+                }
+                finally { if (e_1) throw e_1.error; }
             }
-            if (encryptCert) {
-                IDPSSODescriptor_1.push(libsaml_1.default.createKeySection('encryption', encryptCert));
+            try {
+                for (var _k = __values(utility_1.castArrayOpt(encryptCert)), _l = _k.next(); !_l.done; _l = _k.next()) {
+                    var cert = _l.value;
+                    IDPSSODescriptor_1.push(libsaml_1.default.createKeySection('encryption', cert));
+                }
             }
-            else {
-                //console.warn('Construct identity provider - missing encrypt certificate');
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (_l && !_l.done && (_b = _k.return)) _b.call(_k);
+                }
+                finally { if (e_2) throw e_2.error; }
             }
             if (utility_1.isNonEmptyArray(nameIDFormat)) {
                 nameIDFormat.forEach(function (f) { return IDPSSODescriptor_1.push({ NameIDFormat: f }); });

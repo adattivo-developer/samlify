@@ -207,7 +207,7 @@ function getPublicKeyPemFromCertificate(x509Certificate) {
 }
 /**
 * @desc Read private key from pem-formatted string
-* @param {string | Buffer} keyString pem-formattted string
+* @param {string | Buffer} keyString pem-formatted string
 * @param {string} protected passphrase of the key
 * @return {string} string in pem format
 * If passphrase is used to protect the .pem content (recommend)
@@ -229,6 +229,12 @@ function isNonEmptyArray(a) {
     return Array.isArray(a) && a.length > 0;
 }
 exports.isNonEmptyArray = isNonEmptyArray;
+function castArrayOpt(a) {
+    if (a === undefined)
+        return [];
+    return Array.isArray(a) ? a : [a];
+}
+exports.castArrayOpt = castArrayOpt;
 function notEmpty(value) {
     return value !== null && value !== undefined;
 }

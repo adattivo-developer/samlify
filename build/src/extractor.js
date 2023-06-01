@@ -164,6 +164,11 @@ exports.logoutRequestFields = [
         attributes: []
     },
     {
+        key: 'sessionIndex',
+        localPath: ['LogoutRequest', 'SessionIndex'],
+        attributes: []
+    },
+    {
         key: 'signature',
         localPath: ['LogoutRequest', 'Signature'],
         attributes: [],
@@ -309,7 +314,7 @@ function extract(context, fields) {
             var attributeValues = baseNode.map(function (node) {
                 var nodeDoc = new dom().parseFromString(node);
                 var values = xpath_1.select(childXPath_1, nodeDoc).reduce(function (r, n) {
-                    r[camelcase_1.default(n.name)] = n.value;
+                    r[camelcase_1.default(n.name, { locale: 'en-us' })] = n.value;
                     return r;
                 }, {});
                 return values;

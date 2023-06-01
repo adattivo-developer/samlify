@@ -80,7 +80,7 @@ function pvPair(param, value, first) {
 }
 /**
 * @private
-* @desc Refractored part of simple signature generation for login/logout request
+* @desc Refactored part of simple signature generation for login/logout request
 * @param  {string} type
 * @param  {string} rawSamlRequest
 * @param  {object} entitySetting
